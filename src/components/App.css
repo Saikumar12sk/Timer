@@ -1,0 +1,108 @@
+/* Reset default browser styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  /* Fullscreen main container with animated background */
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: #00c6ff;  /* fallback */
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .main:before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 100%;
+  }
+  
+ 
+  
+  /* Time display styling */
+  h1.time {
+    font-size: 8vw; /* Scale the time font based on the viewport width */
+    color: #fff;
+    letter-spacing: 3px;
+    text-shadow: 3px 5px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+  }
+  
+  /* Button styling with hover effects */
+  button {
+    font-size: 2vw; /* Responsive button size based on viewport width */
+    padding: 12px 25px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    
+  }
+  
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Start button style */
+  button.start {
+    color: #28a745;
+    border: 2px solid #28a745;
+    background-color: transparent;
+  }
+  
+  button.start:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  /* Pause button style */
+  button.Pause {
+    color: #007bff;
+    border: 2px solid #007bff;
+    background-color: transparent;
+  }
+  
+  button.Pause:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Reset button style */
+  button.Reset {
+    color: #dc3545;
+    border: 2px solid #dc3545;
+    background-color: transparent;
+  }
+  
+  button.Reset:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  /* Stopwatch container */
+  .container {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 20px;
+    z-index: 1; /* Ensures it is above the animated background */
+    text-align: center;
+    max-width: 90vw; /* Responsive scaling */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+ 
+  
