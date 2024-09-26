@@ -1,108 +1,209 @@
 /* Reset default browser styling */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(45deg, #0072ff, #00c6ff, #00ff9d, #ff00e1);
+  background-size: 400% 400%;  /* Creates a large gradient canvas for animation */
+  position: relative;
+  overflow: hidden;
+  animation: gradientShift 10s ease-in-out infinite;
+}
+
+/* Gradient animation to shift colors smoothly */
+@keyframes gradientShift {
+  0% {
+      background-position: 0% 50%;
   }
-  
-  html, body {
-    height: 100%;
-    overflow: hidden;
+  50% {
+      background-position: 100% 50%;
   }
-  
-  /* Fullscreen main container with animated background */
-  .main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    background: #00c6ff;  /* fallback */
-    background: linear-gradient(to right, #0072ff, #00c6ff);
-    position: relative;
-    overflow: hidden;
+  100% {
+      background-position: 0% 50%;
   }
-  
-  .main:before {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 100%;
+}
+
+/* Floating shape animation */
+.main:before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: floatShape 20s infinite linear alternate;
+}
+
+.main:after {
+  content: "";
+  position: absolute;
+  bottom: -150px;
+  right: -150px;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: floatShapeReverse 25s infinite linear alternate;
+}
+
+@keyframes floatShape {
+  0% {
+      transform: translate(0, 0) scale(1);
   }
-  
- 
-  
-  /* Time display styling */
-  h1.time {
-    font-size: 8vw; /* Scale the time font based on the viewport width */
-    color: #fff;
-    letter-spacing: 3px;
-    text-shadow: 3px 5px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 30px;
+  100% {
+      transform: translate(300px, 200px) scale(1.5);
   }
-  
-  /* Button styling with hover effects */
-  button {
-    font-size: 2vw; /* Responsive button size based on viewport width */
-    padding: 12px 25px;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 10px;
-    
+}
+
+@keyframes floatShapeReverse {
+  0% {
+      transform: translate(0, 0) scale(1);
   }
-  
-  button:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+  100% {
+      transform: translate(-300px, -200px) scale(1.5);
   }
-  
-  /* Start button style */
-  button.start {
-    color: #28a745;
-    border: 2px solid #28a745;
-    background-color: transparent;
+}
+
+h1.time {
+  font-size: 8vw; 
+  color: #fff;
+  letter-spacing: 3px;
+  text-shadow: 3px 5px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px;
+  animation: fadeIn 3s ease-in-out, textGlow 1.5s ease-in-out infinite alternate;
+}
+
+/* Fade-in for text and glow animation */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-50px);
   }
-  
-  button.start:hover {
-    background-color: #28a745;
-    color: #fff;
+  100% {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  /* Pause button style */
-  button.Pause {
-    color: #007bff;
-    border: 2px solid #007bff;
-    background-color: transparent;
+}
+
+@keyframes textGlow {
+  0% {
+      text-shadow: 0 0 10px rgba(255,255,255,0.2);
   }
-  
-  button.Pause:hover {
-    background-color: #007bff;
-    color: #fff;
+  100% {
+      text-shadow: 0 0 20px rgba(255,255,255,0.8);
   }
-  
-  /* Reset button style */
-  button.Reset {
-    color: #dc3545;
-    border: 2px solid #dc3545;
-    background-color: transparent;
+}
+
+/* Buttons styling and hover effects */
+button {
+  font-size: 2vw; 
+  padding: 12px 25px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; /* Smoother hover effects */
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: transparent; /* Start with a transparent background */
+  border: 2px solid transparent; /* Transparent border that changes */
+}
+
+button:hover {
+  transform: scale(1.1) rotate(3deg);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow effect */
+}
+
+button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+button:hover:before {
+  opacity: 1;
+}
+
+button.start {
+  color: #28a745;
+  border: 2px solid #28a745;
+  background-color: transparent;
+}
+
+button.start:hover {
+  background-color: #28a745;
+  color: #fff;
+  transform: scale(1.2) rotate(-3deg);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+button.Pause {
+  color: #007bff;
+  border: 2px solid hsl(211, 100%, 50%);
+}
+
+button.Pause:hover {
+  background-color: #007bff;
+  color: #fff;
+  transform: scale(1.2) rotate(-3deg);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+button.Reset {
+  color: #dc3545;
+  border: 2px solid #dc3545;
+}
+
+button.Reset:hover {
+  background-color: #dc3545;
+  color: #fff;
+  transform: scale(1.2) rotate(-3deg);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Container styling */
+.container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 20px;
+  z-index: 1; /* Ensures it is above the animated background */
+  text-align: center;
+  max-width: 90vw; /* Responsive scaling */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+  animation: slideUp 2s ease;
+}
+
+@keyframes slideUp {
+  0% {
+      opacity: 0;
+      transform: translateY(50px);
   }
-  
-  button.Reset:hover {
-    background-color: #dc3545;
-    color: #fff;
+  100% {
+      opacity: 1;
+      transform: translateY(0);
   }
-  
-  /* Stopwatch container */
-  .container {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 40px;
-    border-radius: 20px;
-    z-index: 1; /* Ensures it is above the animated background */
-    text-align: center;
-    max-width: 90vw; /* Responsive scaling */
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
-  }
-  
- 
-  
+}
